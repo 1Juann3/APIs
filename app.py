@@ -26,8 +26,8 @@ def get_store_name(name):
 def get_stores():
     return jsonify({'stores': stores})
 
-@app.route('/store/<sting:name>/item', method=['POST'])
-def create_item(name):
+@app.route('/store/<string:name>/item', methods=['POST'])
+def create_items(name):
     pass
 
 @app.route('/store/<string:name>/item')
