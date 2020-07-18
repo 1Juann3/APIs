@@ -1,13 +1,13 @@
-from flask import Flask 
+from flask import Flask, jsonify
 
 app = Flask(__name__) 
 
 stores = [
     {
-        'name': 'store1'
+        'name': 'store1',
         'items':[
             {
-                'name': 'item1'
+                'name': 'item1',
                 'price': 10.99
             }
         ]
@@ -24,7 +24,7 @@ def get_store_name(name):
 
 @app.route('/store')
 def get_stores():
-    pass
+    return jsonify({'stores': stores})
 
 @app.route('/store/<sting:name>/item', method=['POST'])
 def create_item(name):
