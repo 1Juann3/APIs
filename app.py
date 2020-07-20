@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, request, render_template #import flask and some functions
-
+#import flask and some functions
+from flask import Flask, jsonify, request, render_template 
 app = Flask(__name__) 
 
 stores = [
@@ -19,7 +19,8 @@ def home():
     return render_template('index.html')
 
 @app.route('/store', methods=['POST'])   
-def create_store():                        #create a store
+#create a store
+def create_store():
     request_data = request.get_json()
     new_store = {
         'name': request_data['name'],
@@ -29,7 +30,8 @@ def create_store():                        #create a store
     return jsonify(new_store)
 
 @app.route('/store/<string:name>')
-def get_store_name(name):              #get the name of a store 
+ #get the name of a store 
+def get_store_name(name):
     for store in stores:
         if store['name'] == name:
             return jsonify(store)
@@ -38,12 +40,14 @@ def get_store_name(name):              #get the name of a store
     
 
 @app.route('/store')
-def get_stores():                    #get the list of stores that has been created
+#get the list of stores that has been created
+def get_stores():
     return jsonify({'stores': stores})
 
 @app.route('/store/<string:name>/item', methods=['POST'])
-def create_items(name):                  
-    request_data = request.get_json()       #create an item in the store that you want
+ #create an item in the store that you want
+def create_items(name):    
+    request_data = request.get_json()
     for store in stores:
         if store['name'] == name:
             new_item = {
@@ -54,7 +58,8 @@ def create_items(name):
         return jsonify(new_item)
 
 @app.route('/store/<string:name>/item')
-def get_items(name):                       #get an item with the name and the price 
+#get an item with the name and the price 
+def get_items(name):
     for store in stores:
         if store['name'] == name:
             return jsonify({'items':store['items'] })
