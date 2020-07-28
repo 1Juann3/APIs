@@ -18,7 +18,7 @@ stores = [
 def home():  
     return render_template('index.html')
 
-@app.route('/store', methods=['POST'])   
+@app.route('/stores', methods=['POST'])   
 #create a store
 def create_store():
     request_data = request.get_json()
@@ -29,7 +29,7 @@ def create_store():
     stores.append(new_store)
     return jsonify(new_store)
 
-@app.route('/store/<string:name>')
+@app.route('/stores/<string:name>')
  #get the name of a store 
 def get_store_name(name):
     for store in stores:
@@ -39,12 +39,12 @@ def get_store_name(name):
             return jsonify({'message': 'Store not found'})
     
 
-@app.route('/store')
+@app.route('/stores')
 #get the list of stores that has been created
 def get_stores():
     return jsonify({'stores': stores})
 
-@app.route('/store/<string:name>/item', methods=['POST'])
+@app.route('/stores/<string:name>/items', methods=['POST'])
  #create an item in the store that you want
 def create_items(name):    
     request_data = request.get_json()
@@ -57,7 +57,7 @@ def create_items(name):
         store['items'].append(new_item)
         return jsonify(new_item)
 
-@app.route('/store/<string:name>/item')
+@app.route('/stores/<string:name>/items')
 #get an item with the name and the price 
 def get_items(name):
     for store in stores:
